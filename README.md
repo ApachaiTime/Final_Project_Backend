@@ -12,6 +12,5 @@ validator for input validation
 cors
 
 #### Run
-bash
-npm run dev     # development (nodemon)
-npm start       # production
+npm run dev 
+
