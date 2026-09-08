@@ -1,11 +1,23 @@
 const path = require("path");
+const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 
-const { PORT = 3000 } = process.env;
-mongoose.connect("mongodb://127.0.0.1:27017/npe_db");
+dotenv.config();
+
+const { PORT = 3000, MONGO_URI } = process.env;
+mongoose
+  .connect(MONGO_URI)
+  .then(() => {
+    console.log("Connected to MongoDB");
+
+    if (!MONGO_URI) {
+      throw new Error("MONGO_URI is not defined in the environment variables.");
+    }
+  })
+  .catch((err) => console.log("Error connecting to MongoDB:", err));
 
 const userRoutes = require("./routes/users");
 const parkRoutes = require("./routes/parks");
