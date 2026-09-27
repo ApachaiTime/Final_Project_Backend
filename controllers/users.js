@@ -76,6 +76,7 @@ const login = (req, res) => {
           name: foundUser.name,
           zipCode: foundUser.zipCode,
           avatar: foundUser.avatar,
+          savedParks: foundUser.savedParks,
         },
       });
     })
@@ -112,8 +113,12 @@ const updateUser = (req, res) => {
   const updates = {};
   if (req.body.name !== undefined) updates.name = req.body.name;
   if (req.body.zipCode !== undefined) updates.zipCode = req.body.zipCode;
+  if (req.body.savedParks !== undefined)
+    updates.savedParks = req.body.savedParks;
   if (req.file) {
-    updates.avatar = `${req.protocol}://${req.get("host")}/uploads/avatars/${req.file.filename}`;
+    updates.avatar = `${req.protocol}://${req.get("host")}/uploads/avatars/${
+      req.file.filename
+    }`;
   } else if (req.body.avatar !== undefined) {
     updates.avatar = req.body.avatar;
   }
@@ -136,7 +141,6 @@ const updateUser = (req, res) => {
       }
     });
 };
-
 
 module.exports = {
   login,

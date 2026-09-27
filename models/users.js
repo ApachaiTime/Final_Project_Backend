@@ -40,6 +40,10 @@ const UserSchema = new mongoose.Schema({
     },
     message: "You must enter a valid zip code",
   },
+  savedParks: {
+    type: [String],
+    default: [],
+  },
 });
 
 UserSchema.statics.findByCred = function (email, password) {
