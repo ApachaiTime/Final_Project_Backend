@@ -36,7 +36,6 @@ const createComment = (req, res) => {
           authorName: foundUser.name,
           text: req.body.text,
         })
-        .orFail()
         .then((newComment) => {
           console.log(newComment);
           res.json(newComment);
